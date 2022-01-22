@@ -72,6 +72,7 @@ def find_points(p):
 
     plt.scatter(x1, y1)
 
+
 # Point addition
 
 Point = namedtuple("Point", "x y")
@@ -127,41 +128,75 @@ def ecc_add(P, Q):
 p = 17
 a = 0
 b = 7
-ecc_Point = []
-for i in range(p):
-    mod_x = (i ** 3 + a * i + b) % p
-    for j in range(int(p)):
-        if (j ** 2) % p == mod_x:
-            if j == 0:
-                ecc_Point.append([i, j])
+
+
+def count_ecc(a, b, p):
+    ecc_Point = []
+    for i in range(p):
+        mod_x = (i ** 3 + a * i + b) % p
+        for j in range(int(p)):
+            if (j ** 2) % p == mod_x:
+                if j == 0:
+                    ecc_Point.append([i, j])
+                    break
+                else:
+                    ecc_Point.append([i, j])
+                    ecc_Point.append([i, p - j])
                 break
-            else:
-                ecc_Point.append([i, j])
-                ecc_Point.append([i,p-j])
-            break
-print("All points on ECC: ", ecc_Point)
-count_p = len(ecc_Point)
+    return len(ecc_Point)+1
 
-P = Point(1, 5)
-Q = Point(2, 10)
+print(count_ecc(0,7,17))
 
-add_PQ = ecc_add(P, Q)
 
-print("P: ", P)
-print("Q: ", Q)
+ecc_test = []
+for a in range(p):
+    for b in range(p):
+        test = count_ecc(a,b,p) #tổng số điểm của ecc
+        ecc_test.append(test) #thêm số điểm và các thông số a,b vào mảng
 
-print("P+Q: ", add_PQ)
+occ_dict = {}
+for item in ecc_test:
+    if item not in occ_dict:
+        occ_dict[item] = 1
+    else:
+        occ_dict[item] += 1
 
-index = 2
-X = P
-while True:
-    X = ecc_add(P,X)
-    if index == count_p+2:
-        break
+print(occ_dict)
 
-    print(f"{index}P = {X}")
-    index += 1
 
+
+
+# for i, val in enumerate(ecc_test):
+#     print(i, ",", val[0])
+
+
+
+
+
+# print("All points on ECC: ", ecc_Point)
+# count_p = len(ecc_Point)
+# print(count_p + 1)
+
+# P = Point(1, 5)
+# Q = Point(6, 11)
+#
+# add_PQ = ecc_add(P, Q)
+#
+# print("P: ", P)
+# print("Q: ", Q)
+#
+# print("P+Q: ", add_PQ)
+#
+# index = 2
+# X = P
+# while True:
+#     X = ecc_add(P,X)
+#     if index == count_p+2:
+#         break
+#
+#     print(f"{index}P = {X}")
+#     index += 1
+#
 
 
 # create_graph(20,a,b)
