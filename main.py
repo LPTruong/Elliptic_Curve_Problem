@@ -127,7 +127,7 @@ def ecc_add(P, Q):
 
 p = 17
 a = 0
-b = 7
+b = 0
 
 
 def count_ecc(a, b, p):
@@ -145,14 +145,22 @@ def count_ecc(a, b, p):
                 break
     return len(ecc_Point)+1
 
-print(count_ecc(0,7,17))
-
-
+ecc_T = []
 ecc_test = []
-for a in range(p):
-    for b in range(p):
-        test = count_ecc(a,b,p) #tổng số điểm của ecc
-        ecc_test.append(test) #thêm số điểm và các thông số a,b vào mảng
+for a in range(-p,p):
+    for b in range(-p,p):
+        if 4*a**3 + 27*b**2 != 0:
+            test = count_ecc(a,b,p) #tổng số điểm của ecc
+            ecc_test.append(test) #thêm số điểm và các thông số a,b vào mảng
+            ecc_T.append([test,a,b])
+
+
+# print("Số thứ nhất thể hiện số điểm")
+# print("Số thứ 2 là a")
+# print("Số thứ 3 là b")
+# print(ecc_T)
+
+ecc_test.sort()
 
 occ_dict = {}
 for item in ecc_test:
@@ -161,16 +169,12 @@ for item in ecc_test:
     else:
         occ_dict[item] += 1
 
+print("")
+print("")
+print("Số thứ nhất thể hiện số điểm ")
+print("Số thứ hai thể hiện số đường cong có cùng số điểm ")
 print(occ_dict)
-
-
-
-
-# for i, val in enumerate(ecc_test):
-#     print(i, ",", val[0])
-
-
-
+print(len(ecc_test))
 
 
 # print("All points on ECC: ", ecc_Point)
