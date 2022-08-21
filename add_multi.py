@@ -6,7 +6,7 @@ import sys
 Point = namedtuple("Point", "x y")
 O = "Infinity"
 
-
+# Kiểm tra giá trị đầu vào a, b
 def valid(P):
     if P == O:
         return True
@@ -43,13 +43,39 @@ def ecc_add(P, Q):
             result = O
         else:
             if P == Q:
-                dydx = (3 * P.x ** 2 + a) * inverse_mod_p(2 * P.y)
+                lamda = (3 * P.x ** 2 + a) * inverse_mod_p(2 * P.y)
             else:
-                dydx = (Q.y - P.y) * inverse_mod_p(Q.x - P.x)
-            x = (dydx ** 2 - P.x - Q.x) % p
-            y = (dydx * (P.x - x) - P.y) % p
+                lamda = (Q.y - P.y) * inverse_mod_p(Q.x - P.x)
+            x = (lamda ** 2 - P.x - Q.x) % p
+            y = (lamda * (P.x - x) - P.y) % p
 
             result = Point(x, y)
         return result
 
+# Q = Point(1, 12)
+#
+# # Q.y = -Q.y
+# # print(Q.y)
+# P = Point(1,5)
+# print("Điểm P:", P)
+# print("Điểm Q:", Q, "\n")
+# add_PQ = ecc_add(P, Q)
+# print("Kết quả của phép cộng hai điểm P, Q:" ,add_PQ)
+#
+# print("Kết quả của phép nhân với điểm ban đầu là P:" , P , "\n")
 
+
+
+
+# index = 1
+# X = P
+# while True:
+#     if index != 1:
+#         X = ecc_add(P,X)
+#     if index == 2*p:
+#         break
+#     elif X == "Infinity":
+#         print(f"{index}P = {X}")
+#     else:
+#         print(f"{index}P = {X.x, X.y}" , end= (",   " if(index%4 != 0) else '\n'))
+#     index += 1

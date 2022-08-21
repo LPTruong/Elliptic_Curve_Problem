@@ -5,7 +5,7 @@ from collections import namedtuple
 Point = namedtuple("Point", "x y")
 mod = p
 
-P = Point(1,5)
+P = Point(0,0)
 
 def pointAddition(P, Q , a, b, mod):
     # Kiem tra diem co nam tren ECC khong?

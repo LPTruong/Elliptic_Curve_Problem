@@ -7,12 +7,12 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 from math import ceil, sqrt
-from draw import create_graph
+from draw import *
 from prime_number import isprime
 from add_multi import ecc_add
 from variable import a,b,p
 from bsgs import bsgs
-from count_ecc import count_ecc
+from count_ecc import naive
 
 
 
@@ -23,7 +23,7 @@ ecc_test = []
 for a in range(-p, p):
     for b in range(-p, p):
         if 4*a**3 + 27*b**2 != 0:
-            test = count_ecc(a,b,p) #tổng số điểm của ecc
+            test = naive(a,b,p) #tổng số điểm của ecc
             ecc_test.append(test)
             #thêm số điểm và các thông số a,b vào mảng
             ecc_T.append([test,a,b])
@@ -88,8 +88,8 @@ print(len(ecc_T))
 # count_p = len(ecc_Point)
 # print(count_p + 1)
 
-# P = Point(1, 5)
-# Q = Point(6, 11)
+# P = Point(0, 1)
+# Q = Point(0, 1)
 #
 # add_PQ = ecc_add(P, Q)
 #
@@ -109,7 +109,7 @@ print(len(ecc_T))
 #     index += 1
 #
 
-
+#
 # create_graph(20,a,b)
 # find_points(p)
 # plt.show()

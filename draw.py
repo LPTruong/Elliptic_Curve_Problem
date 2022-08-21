@@ -52,24 +52,23 @@ def create_graph(size, a, b):
 
 # Tìm điểm trên trường hữu hạn và vẽ lên đồ thị
 
-# def find_points(p):
-#     # Find all points ECC mod p
-#     x1 = []
-#     y1 = []
-#     for i in range(p):
-#         mod_x = (i ** 3 + a * i + b) % p
-#         for j in range(int(p)):
-#             if (j ** 2) % p == mod_x:
-#                 if j == 0:
-#                     y1.append(j)
-#                     x1.append(i)
-#                     break
-#                 else:
-#                     y1.append(j)
-#                     x1.append(i)
-#                     y1.append(p - j)
-#                     x1.append(i)
-#                 break
-#
-#     plt.scatter(x1, y1)
-#
+def find_points(p):
+    # Find all points ECC mod p
+    x1 = []
+    y1 = []
+    for i in range(p):
+        mod_x = (i ** 3 + a * i + b) % p
+        for j in range(int(p)):
+            if (j ** 2) % p == mod_x:
+                if j == 0:
+                    y1.append(j)
+                    x1.append(i)
+                    break
+                else:
+                    y1.append(j)
+                    x1.append(i)
+                    y1.append(p - j)
+                    x1.append(i)
+                break
+
+    plt.scatter(x1, y1)
